@@ -152,7 +152,7 @@ class Analytics(models.Model):
 # Site Configuration model
 class Configuration(models.Model):
     site_name = models.CharField(max_length=30)
-    site_description = models.CharField(max_length==75)
+    site_description = models.CharField(max_length=75)
     site_logo = models.ImageField(upload_to='logos')
 
 class Subscription(models.Model):
