@@ -5,7 +5,7 @@ from django.db import models
 class User(models.Model):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(max_length=75, unique=True)
-    password = models.CharField()
+    password = models.CharField(max_length=100)
     is_vendor = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=True)
 
@@ -14,7 +14,7 @@ class User(models.Model):
     
 # Vendor model
 class Vendor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='users')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='vendor')
     bio = models.TextField()
     shipping_details = models.TextField()
     return_policy = models.TextField()
@@ -33,8 +33,8 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='vendor')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     slug = models.SlugField(unique=True)
     price = models.FloatField() # If there is an error regarding prices, change this to DecimalField
     stock = models.PositiveIntegerField(default=1)
@@ -48,7 +48,7 @@ class Product(models.Model):
         return self.name
     
 class Order(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
     products = models.ManyToManyField(Product, through='OrderItem')
     total_price = models.FloatField()
     shipping_address = models.TextField()
@@ -59,24 +59,24 @@ class Order(models.Model):
         return self.total_price
     
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cart')
     session_id = models.CharField(max_length=50, null=True, blank=True)
     items = models.ManyToManyField(Product, through='CartItem')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now= True)
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='products')
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
 class Shipping(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=75)
     description = models.TextField()
     rating = models.FloatField()
 
@@ -84,10 +84,10 @@ class Shipping(models.Model):
         return self.name
     
 class Payment(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='payment')
     method = models.CharField(max_length=50)
     amount = models.FloatField()
-    transaction_id = models.CharField()
+    transaction_id = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -103,8 +103,8 @@ class Coupon(models.Model): # For discounts in shop.
         return self.code
     
 class Review(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product')
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='review')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='review')
     rating = models.PositiveIntegerField()
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -113,12 +113,12 @@ class Review(models.Model):
         return self.comment
     
 class Wishlist(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    products = models.ManyToManyField(Product, related_name='products')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wishlist')
+    products = models.ManyToManyField(Product, related_name='wishlist')
 
 
 class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notification')
     message = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
 
@@ -126,7 +126,7 @@ class Notification(models.Model):
         return self.sent_at
     
 class Blog(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post')
     slug = models.SlugField(unique=True)
     title = models.TextField()
     content = models.TextField()
@@ -146,7 +146,7 @@ class Contact(models.Model):
 class Analytics(models.Model):
     sales = models.DecimalField(max_digits=10, decimal_places=2)
     traffic = models.PositiveIntegerField()
-    popular_products = models.ManyToManyField(Product, related_name='popular-products')
+    popular_products = models.ManyToManyField(Product, related_name='analytics')
     created_at = models.DateTimeField()
 
 # Site Configuration model
