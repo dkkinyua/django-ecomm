@@ -141,7 +141,11 @@ class FAQ(models.Model):
         return self.question
     
 class Contact(models.Model):
-    pass
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=75)
+    telephone = models.CharField(max_length=20)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Analytics(models.Model):
     sales = models.DecimalField(max_digits=10, decimal_places=2)
@@ -171,4 +175,13 @@ class Refund(models.Model):
 
     def __str__(self):
         return self.reason
+    
+class Tax(models.Model):
+    name = models.CharField(max_length=75)
+    rate = models.DecimalField(max_digits=5, decimal_places=2)
+    country = models.CharField(max_length=75)
+    state = models.CharField(max_length=75)
+
+    def __str__(self):
+        return self.name
 
