@@ -88,7 +88,7 @@ class TaxViewset(viewsets.ModelViewSet):
     serializer_class = TaxSerializer
 
 class RefundViewset(viewsets.ModelViewSet):
-    queryset = Vendor.objects.all()
+    queryset = Refund.objects.all()
     serializer_class = RefundSerializer
 
 class SubscriptionViewset(viewsets.ModelViewSet):
