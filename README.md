@@ -1,2 +1,4 @@
 # django-ecomm
-A Django ecommerce web application with React
+A Django backend ecommerce web application with React (frontend) built with ```django-rest-framework```
+
+
