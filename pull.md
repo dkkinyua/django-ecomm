@@ -1,29 +1,38 @@
-# Creation of serializers and addition of *Tax* and *Contact* models
-1. **Creation of serializers**
-What's a serializer? In the context of Django REST Framework (DRF), a serializer is a component that is used to transform complex data types, such as Django models or querysets, into native Python data types. These native data types can then be easily rendered into JSON, XML, or other content types suitable for APIs. Conversely, serializers can also transform parsed data back into complex types, after validating the input.
+# Registered models to the admin panel and updated the settings file
+**1. Registered models to the admin panel**
+The admin panel is provided in Django for the site admin / superuser can change, add, or edit things on the site even if they do not have any technical experience in Django or programming in general. The admin panel can be accessed through the following endpoint *http:localhost:8000/admin* in development or if the site is live, *www.example.com/admin* if the website is built on Python's Django framework. 
 
-Serializers for different models have been created to be able to parse the data into JSON format, for example,
+**NOTE: Use proper authentication and authorization procedures to protect and prevent unauthorized users from accessing the admin panel without proper permissions!**
+
+So as to add, edit and make changes to the application, we need to register our models. To register these models to the admin panel, head over to *core/admin.py* file and do the following
+
+- Import necessary modules and packages:
 ```python
 
-from rest_framework import serializers
-from .models import User, Review
-
-# A user serializer
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
-
-# A product serializer
-class ReviewSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
-    class Meta:
-        model = Review
-        fields = '__all__'
-
+from django.contrib import admin
+from models import User, Vendor # An example of the models, they are too many
 
 ```
-For the ReviewSerializer, there is a *user* variable. This user variable extends the UserSerializer to be shown on the ReviewSerializer as read only, meaning that you cannot deserialize it.
 
-2. **Addition of the *Tax* and *Contact* models**:
-Check core/models.py for more information. 
+- Register the models using the ```register()``` function:
+
+```python
+
+from django.contrib import admin
+from models import User, Vendor
+
+admin.site.register(User)
+admin.site.register(Vendor)
+
+```
+
+- So as to access the admin panel from our browser using this endpoint *localhost:8000/admin*, we need to register this endpoint as an URL in *project/urls.py*:
+```python
+
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', include(router.urls)),
+]
+
+```
