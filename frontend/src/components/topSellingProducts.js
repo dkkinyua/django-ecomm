@@ -1,9 +1,28 @@
 import React from "react";
+import { fetchProducts } from "../redux/actions/productActions";
+import { Link } from 'react-router-dom'
 
-export const TopSellingProducts = () => {
-    return(
+const TopSellingProducts = ({ products }) => {
+    const topSellingProducts = products
+        .sort((a, b) => b.sales - a.sales)
+        .slice(0, 10)
+
+    return (
         <div>
-            <h1>Flash Sale page</h1>
+            <h3>Top Selling Products</h3>
+            <div>
+                {topSellingProducts.map((product) => {
+                    <div key={product.id} className="col-md-6">
+                        <Link to={`/products/${product.slug}`}>
+                            <img src={product.image}/>
+                            <h4>{product.name}</h4>
+                            <h5>$ {product.price}</h5>
+                        </Link>
+                    </div>
+                })}
+            </div>
         </div>
     )
 };
+
+export default TopSellingProducts

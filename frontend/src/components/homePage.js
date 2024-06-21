@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategories } from '../redux/actions/categoryActions'
 import { fetchProducts } from '../redux/actions/productActions'
-import { CategoryList } from './categoryList'
-import { TopSellingProducts } from './topSellingProducts'
-import { FlashSale } from './flashSale'
+import CategoryList from './categoryList'
+import TopSellingProducts from './topSellingProducts'
+import FlashSale from './flashSale'
 
 export const HomePage = () => {
     const dispatch = useDispatch()

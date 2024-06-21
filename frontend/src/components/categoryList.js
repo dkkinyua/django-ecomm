@@ -1,9 +1,19 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
-export const CategoryList = () => {
+const CategoryList = ({categories}) => {
     return(
         <div>
-            <h1>Flash Sale page</h1>
+            <h3>Categories</h3>
+            {categories.map((category) => {
+                <ul>
+                    <li key={category.id}>
+                        <Link to={`/categories/${category.slug}`}>{category.name}</Link>
+                    </li>
+                </ul>
+            })}
         </div>
     )
 };
+
+export default CategoryList
