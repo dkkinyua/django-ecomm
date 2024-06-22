@@ -1,4 +1,4 @@
-
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import HomePage from './components/homePage';
 
@@ -6,7 +6,7 @@ import HomePage from './components/homePage';
 
 function App() {
   return (
-    <>
+    <Router>
     {/* Navbar starts here */}
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
@@ -47,7 +47,7 @@ function App() {
       {/* Navbar ends here */}
 
       <HomePage />
-    </>
+    </Router>
   );
 }
 
