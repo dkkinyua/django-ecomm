@@ -25,4 +25,4 @@ const TopSellingProducts = ({ products }) => {
     )
 };
 
-export default TopSellingProducts
+export default TopSellingProducts;
