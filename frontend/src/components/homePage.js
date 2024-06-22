@@ -33,15 +33,15 @@ const HomePage = () => {
                 <TopSellingProducts products={products} />
             </div>
             {/* Third, fourth and fifth rows, All Products in a category */}
-            {categories.map((category) => {
+            {categories.map((category) => (
                 <div className='row' key={category.id}>
                     <CategoryProducts category={category} products={products} />
                 </div>
-            })}
+            ))}
         </>
     )
-    
-    }
+
+}
 
 
 export default HomePage
