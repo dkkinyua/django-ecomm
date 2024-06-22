@@ -6,7 +6,7 @@ const FlashSale = ({ products }) => {
     return(
         <div>
             <h1>Flash Sale page</h1>
-            {products.map((product) => {
+            {flashSaleProducts.map((product) => {
                 <div className="carousel">
                     Carousel here
                 </div>

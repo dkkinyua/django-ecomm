@@ -13,7 +13,7 @@ const CategoryProducts = ({ category, products }) => {
                 <div className="carousel-inner">
                     {categoryProducts.map((product) => {
                         <div className="card">
-                            <img src={product.image}/>
+                            <img src={product.image} alt={product.name}/>
                             <div>
                                 <h5>{product.name}</h5>
                                 <h6>$ {product.price}</h6>
