@@ -21,7 +21,7 @@ class Vendor(models.Model):
     bank_details = models.TextField()
 
     def __str__(self):
-        return self.bio
+        return self.user.username
     
 # Category model
 class Category(models.Model):
