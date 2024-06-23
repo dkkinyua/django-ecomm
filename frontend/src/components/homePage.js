@@ -19,25 +19,27 @@ const HomePage = () => {
 
     return (
         <>
-            {/* First row, FlashSale and categories */}
-            <div className='row'>
-                <div className='col-md-3'>
-                    <CategoryList categories={categories} />
+            <div>
+                {/* First row, FlashSale and categories */}
+                <div className='row'>
+                    <div className='col-md-3'>
+                        <CategoryList categories={categories} />
+                    </div>
+                    <div className='col-md-9'>
+                        <FlashSale products={categories} />
+                    </div>
                 </div>
-                <div className='col-md-9'>
-                    <FlashSale products={categories} />
+                {/* Second Row, Top selling products*/}
+                <div className='row'>
+                    <TopSellingProducts products={products} />
                 </div>
+                {/* Third, fourth and fifth rows, All Products in a category */}
+                {categories.map((category) => (
+                    <div className='row' key={category.id}>
+                        <CategoryProducts category={category} products={products} />
+                    </div>
+                ))}
             </div>
-            {/* Second Row, Top selling products*/}
-            <div className='row'>
-                <TopSellingProducts products={products} />
-            </div>
-            {/* Third, fourth and fifth rows, All Products in a category */}
-            {categories.map((category) => (
-                <div className='row' key={category.id}>
-                    <CategoryProducts category={category} products={products} />
-                </div>
-            ))}
         </>
     )
 
