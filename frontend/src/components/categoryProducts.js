@@ -26,11 +26,11 @@ const CategoryProducts = ({ category, products }) => {
                             </div>
                         </div>
                     ))}
-                    <a className="carousel-control-prev" href={`category-${category.id}`} role="button" data-ride='prev'>
+                    <a className="carousel-control-prev" href={`#category-${category.id}`} role="button" data-ride='prev'>
                         <span className="carousel-control-prev-icon" aria-hidden='true'></span>
                         <span className="sr-only">Previous</span>
                     </a>
-                    <a className="carousel-control-next" href={`category-${category.id}`} role="button" data-ride='next'>
+                    <a className="carousel-control-next" href={`#category-${category.id}`} role="button" data-ride='next'>
                         <span className="carousel-control-next-icon" aria-hidden='true'></span>
                         <span className="sr-only">Next</span>
                     </a>
