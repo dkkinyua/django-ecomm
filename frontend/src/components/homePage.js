@@ -17,6 +17,8 @@ const HomePage = () => {
         dispatch(fetchProducts());
     }, [dispatch])
 
+    const flashSaleProducts = products.filter(product => product.is_flashsale).slice(0, 5)
+
     return (
         <>
             <div>
@@ -26,7 +28,7 @@ const HomePage = () => {
                         <CategoryList categories={categories} />
                     </div>
                     <div className='col-md-9'>
-                        <FlashSale products={categories} />
+                        <FlashSale products={flashSaleProducts} />
                     </div>
                 </div>
                 {/* Second Row, Top selling products*/}
