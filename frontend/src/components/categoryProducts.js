@@ -21,7 +21,7 @@ const CategoryProducts = ({ category, products }) => {
                                     <h6 className="card-text">$ {product.price}</h6>
                                     <p className="card-text">{product.description}</p>
                                     <small className="card-text">In Stock: {product.stock}</small>
-                                    <Link to={`/products/${product.slug}`}>View Product</Link>
+                                    <Link to={`/products/${product.slug}`}><button className="btn btn-primary">View Product</button></Link>
                                 </div>
                             </div>
                         </div>
