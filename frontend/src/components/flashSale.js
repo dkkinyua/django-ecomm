@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 
 const FlashSale = ({ products }) => {
-    const flashSaleProducts = products.filter((product) => product.isFlashSale)
+    const history = useHistory()
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length)
+        }, 3000)
+
+        return () => clearInterval(interval)
+    }, [products.length])
+
+    const handleClick = () => {
+        const product = product[currentIndex];
+        history.push(`/products/${product.id}`);
+    }
 
     return (
-        <div>
-            <h1>Flash Sale page</h1>
-            {flashSaleProducts.map((product) => (
-                <div className="carousel">
-                    Carousel here
-                </div>
-            ))}
-        </div>
+        <>
+            <h3>Flash Sale</h3>
+            <div className='flash-sale-slider'>
+                {products.map((product, index) => (
+                    <img key={index} src={product.image} alt={product.name} className={ index === currentIndex ? 'active' : ''} />
+                ))}
+            </div>
+
+        </>
     )
 }
 
