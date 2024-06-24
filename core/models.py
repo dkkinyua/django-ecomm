@@ -16,6 +16,7 @@ class User(models.Model):
 class Vendor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='vendor')
     bio = models.TextField()
+    contact_details = models.CharField(max_length=75, null=False)
     shipping_details = models.TextField()
     return_policy = models.TextField()
     bank_details = models.TextField()
