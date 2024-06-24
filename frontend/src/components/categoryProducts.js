@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import '../style.css'
 
 const CategoryProducts = ({ category, products }) => {
     const categoryProducts = products.filter(
@@ -8,7 +8,7 @@ const CategoryProducts = ({ category, products }) => {
     )
 
     return (
-        <>
+        <div className="category-product">
             <h3>{category.name}</h3>
             <div className="carousel slide" id={`carousel-${category.id}`} data-ride='carousel'>
                 <div className="carousel-inner">
@@ -26,17 +26,17 @@ const CategoryProducts = ({ category, products }) => {
                             </div>
                         </div>
                     ))}
-                    <a className="carousel-control-prev" href={`#category-${category.id}`} role="button" data-ride='prev'>
-                        <span className="carousel-control-prev-icon" aria-hidden='true'></span>
+                    <a className="carousel-control-prev" href={`#carousel-${category.id}`} role="button" data-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span className="sr-only">Previous</span>
                     </a>
-                    <a className="carousel-control-next" href={`#category-${category.id}`} role="button" data-ride='next'>
-                        <span className="carousel-control-next-icon" aria-hidden='true'></span>
+                    <a className="carousel-control-next" href={`#carousel-${category.id}`} role="button" data-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="sr-only">Next</span>
                     </a>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

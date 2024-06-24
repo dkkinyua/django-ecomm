@@ -1,0 +1,4 @@
+.category-product img {
+    width: 200px;
+    object-fit: cover;
+}
