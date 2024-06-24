@@ -1,6 +1,7 @@
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './components/homePage';
+import ProductDetails from './components/productDetails';
 
 
 
@@ -45,8 +46,10 @@ function App() {
         </div>
       </nav>
       {/* Navbar ends here */}
-
-      <HomePage />
+      <Routes>
+        <Route exact path='/' Component={HomePage} />
+        <Route exact path='products/:productId' Component={ProductDetails}/>
+      </Routes>
     </Router>
   );
 }
