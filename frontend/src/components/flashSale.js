@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const FlashSale = ({ products }) => {
-    const history = useNavigate()
+    const navigate = useNavigate()
     const [currentIndex, setCurrentIndex] = useState(0)
 
     useEffect(() => {
@@ -15,18 +15,21 @@ const FlashSale = ({ products }) => {
 
     const handleClick = () => {
         const product = products[currentIndex];
-        history.push(`/products/${product.id}`);
+        navigate(`/products/${product.id}`);
     }
 
     return (
         <>
             <h3>Flash Sale</h3>
             <div className='flash-sale-slider'>
-                {products.map((product, index) => (
-                    <img key={index} src={product.image} alt={product.name} className={ index === currentIndex ? 'active' : ''} />
-                ))}
+                {products.length && (
+                    <img 
+                    key = {products[currentIndex].id}
+                    src = {products[currentIndex].image}
+                    alt = {products[currentIndex].name}
+                    />
+                )}
             </div>
-
         </>
     )
 }
