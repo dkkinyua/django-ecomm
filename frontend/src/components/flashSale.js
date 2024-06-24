@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const FlashSale = ({ products }) => {
-    const history = useHistory()
+    const history = useNavigate()
     const [currentIndex, setCurrentIndex] = useState(0)
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const FlashSale = ({ products }) => {
     }, [products.length])
 
     const handleClick = () => {
-        const product = product[currentIndex];
+        const product = products[currentIndex];
         history.push(`/products/${product.id}`);
     }
 
