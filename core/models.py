@@ -41,6 +41,7 @@ class Product(models.Model):
     name = models.CharField(max_length=75)
     description = models.TextField()
     image = models.ImageField(upload_to='products')
+    is_flashsale = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now= True)
 
