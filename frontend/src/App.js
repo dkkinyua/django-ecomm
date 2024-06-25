@@ -45,10 +45,11 @@ function App() {
           </div>
         </div>
       </nav>
+
       {/* Navbar ends here */}
       <Routes>
-        <Route exact path='/' Component={HomePage} />
-        <Route exact path='products/:productId' Component={ProductDetails}/>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='products/:productId' element={<ProductDetails/>}/>
       </Routes>
     </Router>
   );
