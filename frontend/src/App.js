@@ -11,7 +11,7 @@ function App() {
     {/* Navbar starts here */}
       <nav className="navbar navbar-expand-lg bg-success">
         <div className="container-fluid">
-          <Link className="navbar-brand" to='/'>ShopYangu</Link>
+          <Link className="navbar-brand" to='/'>ShopYangu<i class="fa-solid fa-cart-shopping"></i></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -21,21 +21,22 @@ function App() {
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Link</a>
+                <a className="nav-link" href="#">About Us</a>
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
+                  Categories
                 </a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <ul className="dropdown-menu bg-success">
+                  <li><a className="dropdown-item" href="#">Accessories</a></li>
+                  <li><a className="dropdown-item" href="#">Phones</a></li>
+                  <li><a className="dropdown-item" href="#">TVs</a></li>
+                  <li><a className="dropdown-item" href="#">Laptops</a></li>
+                  <li><a className="dropdown-item" href="#">Clothes</a></li>
                 </ul>
               </li>
               <li className="nav-item">
-                <a className="nav-link" aria-disabled="true">Disabled</a>
+                <a className="nav-link" aria-disabled="true">My Account</a>
               </li>
             </ul>
             <form className="d-flex" role="search">
