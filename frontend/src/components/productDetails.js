@@ -23,25 +23,42 @@ const ProductDetails = ({ products, product }) => {
             </div>
 
         {/* Vendor Information */}
-            <div className='vendor-info'>
+            <div className='vendor-info mt-2'>
                 <h5>Product's vendor: <Link to={`/products/${product.vendor.id}`}>{product.vendor}</Link></h5>
                 <p>Contact details: {product.vendor.contact_details}</p>
             </div>
 
         {/* Shipping Info */}
-            <div className='shipping-info'>
+            <div className='shipping-info mt-2'>
                 <h3>Shipping Information:</h3>
                 <p><Link to={product.shipping_policy}>Click Here</Link> for shipping policy.</p>
                 <p><Link to={product.return_policy}>Click Here</Link> for return policy.</p>
             </div>
         
         {/* Reviews */}
-            <div className='reviews'>
+            <div className='reviews mt-2'>
                 <h3>Reviews: </h3>
                 {product.reviews.map(review => (
                     <div key={review.id}>
                         <p>Rating: {review.rating}</p>
                         <p>Comments: {review.comment}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className='related-products mt-2'>
+                <h3>Related Products:</h3>
+                {relatedProducts.map(product => (
+                    <div key={product.id}>
+                        <div className='card'>
+                            <img src={product.image} alt={product.name} className='card-img-top'/>
+                            <div className='card-body'>
+                                <h4 className='card-text'>{product.name}</h4>
+                                <p className='card-text'>Price: ${product.price}</p>
+                                <small className='card-text'>In stock: {product.stock}</small>
+                                <button className='btn btn-dark mt-2'>View Product</button>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </div>
