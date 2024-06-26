@@ -46,19 +46,21 @@ const ProductDetails = ({ products, product }) => {
                 ))}
             </div>
 
-            <div className='related-products mt-2'>
+            <div className='row related-products mt-2'>
                 <h3>Related Products:</h3>
-                {relatedProducts.map(product => (
-                    <div key={product.id}>
-                        <div className='card'>
-                            <img src={product.image} alt={product.name} className='card-img-top'/>
-                            <div className='card-body'>
-                                <h4 className='card-text'>{product.name}</h4>
-                                <p className='card-text'>Price: ${product.price}</p>
-                                <small className='card-text'>In stock: {product.stock}</small>
-                                <button className='btn btn-dark mt-2'>View Product</button>
+                {relatedProducts.map(relatedProduct => (
+                    <div key={product.id} className='col-md-3'>
+                        <Link to={`/products/${relatedProduct.slug}`}>
+                            <div className='card'>
+                                <img src={relatedProduct.image} alt={relatedProduct.name} className='card-img-top'/>
+                                <div className='card-body'>
+                                    <h4 className='card-text'>{relatedProduct.name}</h4>
+                                    <p className='card-text'>Price: ${relatedProduct.price}</p>
+                                    <small className='card-text'>In stock: {relatedProduct.stock}</small>
+                                    <button className='btn btn-dark mt-2'>View Product</button>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 ))}
             </div>
