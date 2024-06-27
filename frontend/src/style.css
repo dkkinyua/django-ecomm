@@ -1,8 +1,14 @@
 .category-product img {
     width: 200px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .top-selling{
     color: black;
+}
+
+.flash-sale-slider img {
+    width: 400px;
+    height: 250px;
+    object-fit: contain;
 }

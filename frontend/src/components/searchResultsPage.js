@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "./productCard";
 
+
 const SearchResultsPage = () => {
     const location = useLocation()
     const queryparams = new URLSearchParams(location.search)
@@ -9,15 +10,35 @@ const SearchResultsPage = () => {
     const [searchResults, setSearchResults] = useState([])
 
     useEffect(() => {
-        const fetchResults = async () => {
-            const response = await axios.get(`http://localhost:8000/api/products/search?q=${searchQuery}`)
-            if (!response.ok){
-                throw new Error('Failed to fetch results')
+        const fetchSearchResults = async () => {
+            try{
+                const response = await fetch(`http://localhost:8000/api/products?q=${searchQuery}`)
+                if (!response.ok){
+                    throw new Error('Failed to fetch results')
+                }
+                const data = await response.json()
+                setSearchResults(data)
+            } catch (error) {
+                console.error("Error: ", error)
             }
-            const data = await response.json
-            setSearchResults(data)
         }
-    })
+
+        fetchSearchResults();
+        
+    }, [searchQuery])
+
+    return(
+        <div>
+            <h3>Search Results for {searchQuery}</h3>
+            <div className="row">
+                {searchResults.map((product) => (
+                    <div key={product.id} className="col-md-6">
+                        <ProductCard product={product}/>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
 }
 
 export default SearchResultsPage
