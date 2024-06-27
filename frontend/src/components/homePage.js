@@ -36,8 +36,8 @@ const HomePage = () => {
                     <TopSellingProducts products={products} />
                 </div>
                 {/* Third, fourth and fifth rows, All Products in a category */}
-                {categories.map((category) => (
-                    <div className='row' key={category.id}>
+                {categories.map(category => (
+                    <div className='row mt-2' key={category.id}>
                         <CategoryProducts category={category} products={products} />
                     </div>
                 ))}
